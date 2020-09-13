@@ -12,7 +12,7 @@ namespace ConsoleApp24
     {
         static void Main()
         {
-            string[] s = Console.ReadLine().Split();
+            var s = Console.ReadLine().Split();
             double arg1 = Сalculator.GetNumber(s[0]);
             double arg2 = Сalculator.GetNumber(s[2]);
             Console.WriteLine(Сalculator.Calc(arg1, arg2, s[1]));
