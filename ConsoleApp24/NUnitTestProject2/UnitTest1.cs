@@ -20,5 +20,16 @@ namespace NUnitTestProject2
         {
             Assert.AreEqual(1, Ñalculator.Calc(2,2, "/"));
         }
+
+        [Test]
+        public void Plus()
+        {
+            Assert.AreEqual(4, Ñalculator.Calc(2, 2, "+"));
+        }
+        [Test]
+        public void Minus()
+        {
+            Assert.AreEqual(0, Ñalculator.Calc(2, 2, "-"));
+        }
     }
 }
