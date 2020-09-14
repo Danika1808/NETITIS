@@ -11,7 +11,7 @@ namespace NUnitTestProject1
         [Test]
         public void Multiply() => Assert.AreEqual(4, Calculator.Calc(2, 2, "*"));
         [Test]
-        public void Devide() => Assert.AreEqual("1", Calculator.Calc(2, 2, "/"));
+        public void Devide() => Assert.AreEqual(1, Calculator.Calc(2, 2, "/"));
         [Test]
         public void Plus() => Assert.AreEqual(4, Calculator.Calc(2, 2, "+"));
         [Test]

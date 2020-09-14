@@ -6,10 +6,17 @@ namespace ConsoleApp24
     {
         static void Main(string[] args)
         {
-            var s = Console.ReadLine().Split();
-            var arg1 = Calculator.GetNumber(s[0]);
-            var arg2 = Calculator.GetNumber(s[2]);
-            Console.WriteLine(Calculator.Calc(arg1, arg2, s[1]));
+            try
+            {
+                var s = Console.ReadLine().Split();
+                var arg1 = Calculator.GetNumber(s[0]);
+                var arg2 = Calculator.GetNumber(s[2]);
+                Console.WriteLine(Calculator.Calc(arg1, arg2, s[1]));
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
         }
     }
 }
