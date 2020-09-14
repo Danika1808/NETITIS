@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleApp24\ConsoleApp24.csproj" />
+    <ProjectReference Include="..\Calculato\Calculator.csproj" />
   </ItemGroup>
 
 </Project>

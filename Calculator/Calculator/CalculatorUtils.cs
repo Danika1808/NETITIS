@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-
-namespace ConsoleApp24
+namespace Calculator
 {
-    public static class Сalculator
+    public class CalculatorUtils
     {
         public static decimal Calc(decimal arg1, decimal arg2, string oper)
         {
