@@ -4,10 +4,9 @@ namespace ConsoleApp1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine(Calculator.OutPut(Console.ReadLine()));
-
         }
     }
 }

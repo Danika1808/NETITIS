@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace ConsoleApp1
 {
     public static class Calculator
