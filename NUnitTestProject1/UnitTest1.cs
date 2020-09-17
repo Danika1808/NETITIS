@@ -1,7 +1,8 @@
 using NUnit.Framework;
-using ConsoleApp24;
+using ConsoleApp1;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
-namespace NUnitTestProject2
+namespace NUnitTestProject1
 {
     public class Tests
     {
@@ -18,7 +19,7 @@ namespace NUnitTestProject2
         [Test]
         public void Devide()
         {
-            Assert.AreEqual(1, Ñalculator.Calc(2,2, "/"));
+            Assert.AreEqual(1, Ñalculator.Calc(2, 2, "/"));
         }
 
         [Test]
@@ -30,6 +31,17 @@ namespace NUnitTestProject2
         public void Minus()
         {
             Assert.AreEqual(0, Ñalculator.Calc(2, 2, "-"));
+        }
+
+        [Test]
+        public void GetNumber()
+        {
+            Assert.AreEqual(1.0, Ñalculator.GetNumber("1,0"));
+        }
+        [Test]
+        public void Input()
+        {
+            Assert.AreEqual(8, Ñalculator.Input("2 * 4"));
         }
     }
 }
