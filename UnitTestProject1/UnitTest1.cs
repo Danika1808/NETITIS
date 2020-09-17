@@ -14,7 +14,7 @@ namespace UnitTestProject1
             [TestMethod]
             public void Minus() => Assert.AreEqual(0, Calculator.Calc(2, 2, "-"));
             [TestMethod]
-            public void GetNumber() => Assert.AreEqual(1.0, Calculator.GetNumber("1,0"));
+            public void GetNumber() => Assert.AreEqual(1, Calculator.GetNumber("1"));
             [TestMethod]
             public void OutPut() => Assert.AreEqual(8, Calculator.OutPut("4 * 2"));
             [TestMethod]
