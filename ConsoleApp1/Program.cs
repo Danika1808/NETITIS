@@ -1,13 +1,12 @@
-﻿using System;
+using System;
 
 namespace ConsoleApp1
 {
-    class Program
-    {
-        static void Main()
-        {
-            var result = Сalculator.Input(Console.ReadLine());
-            Console.WriteLine(result);
-        }
-    }
+class Program
+{
+static void Main()
+{
+Console.WriteLine(Calculator.OutPut(Console.ReadLine()));
+}
+}
 }
