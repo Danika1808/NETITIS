@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies 
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore --no-dependencies
+      run: dotnet build --configuration Debug --no-restore --no-dependencies
     - name: Test
       run: dotnet test --project ConsoleApp1.csproj
