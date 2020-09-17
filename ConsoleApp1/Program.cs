@@ -6,7 +6,7 @@ namespace ConsoleApp1
     {
         static void Main()
         {
-            var result = Сalculator.Input(Console.ReadLine());
+            var result = Calculator.Calc(2, 2, "*");
             Console.WriteLine(result);
         }
     }

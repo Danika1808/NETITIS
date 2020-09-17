@@ -37,15 +37,5 @@ return Calc(arg1, arg2, str[1]);
 }
 }
  
-using System;
 
-namespace ConsoleApp1
-{
-class Program
-{
-static void Main()
-{
-Console.WriteLine(Calculator.OutPut(Console.ReadLine()));
-}
-}
-}
+
