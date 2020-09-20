@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-namespace ConsoleApp1
+using ConsoleApp1;
+
+namespace Program
 {
-    [ExcludeFromCodeCoverage]
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
             Console.WriteLine(Calculator.OutPut(Console.ReadLine()));
         }
