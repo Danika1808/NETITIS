@@ -7,6 +7,7 @@ namespace ConsoleApp1
     {
         static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Console.WriteLine(Calculator.OutPut(Console.ReadLine()));
         }
     }

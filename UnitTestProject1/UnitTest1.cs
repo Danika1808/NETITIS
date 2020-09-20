@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading;
 using ConsoleApp1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject1
@@ -9,8 +8,7 @@ namespace UnitTestProject1
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class UnitTest1
-    {
-        /// <summary>
+    { /// <summary>
         /// Тест сложения калькулятора
         /// </summary>
         [TestMethod]
@@ -69,7 +67,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void GetNumber()
         {
-            string input = "4,4";
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            string input = "4.4";
             decimal expected = 4.4m;
             decimal result = Calculator.GetNumber(input);
             Assert.AreEqual(expected, result);
@@ -80,9 +79,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void OutPut()
         {
-            string input = "4,8 + 2,11";
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            string input = "4.8 + 2.8";
             decimal result = Calculator.OutPut(input);
-            decimal expected = 6.91m;
+            decimal expected = 7.6m;
             Assert.AreEqual(expected, result);
         }
         /// <summary>
