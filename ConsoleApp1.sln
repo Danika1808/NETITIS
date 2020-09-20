@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{6113854D-BD49-43B8-BBD7-02EC3B8F39BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{28775B30-3A3D-44F7-8998-0313B1BE473B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{28775B30-3A3D-44F7-8998-0313B1BE473B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6113854D-BD49-43B8-BBD7-02EC3B8F39BA} = {6113854D-BD49-43B8-BBD7-02EC3B8F39BA}
 	EndProjectSection
