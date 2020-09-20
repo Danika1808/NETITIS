@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using ConsoleApp1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject1
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class UnitTest1
     {
         [TestMethod]
@@ -20,16 +22,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void OutPut() => Assert.AreEqual(8, Calculator.OutPut("4 * 2"));
         [TestMethod]
-        public void Split0() => Assert.AreEqual("1", Calculator.Split("1 / 2")[0]);
+        public void ExpDevide() => Assert.ThrowsException<DivideByZeroException>(() => Calculator.Calc(2.0m, 0.0m, "/"));
         [TestMethod]
-        public void Split1() => Assert.AreEqual("/", Calculator.Split("1 / 2")[1]);
-        [TestMethod]
-        public void Split2() => Assert.AreEqual("2", Calculator.Split("1 / 2")[2]);
-
-        [TestMethod]
-        public void ExpDevide() => Assert.ThrowsException<DivideByZeroException>(() => Calculator.Calc(2, 0, "/"));
-
-        [TestMethod]
-        public void ExpOper() => Assert.ThrowsException<KeyNotFoundException>(() => Calculator.Calc(2, 2, "f"));
+        public void ExpOper() => Assert.ThrowsException<KeyNotFoundException>(() => Calculator.Calc(2.0m, 2.0m, "f"));
     }
 }
