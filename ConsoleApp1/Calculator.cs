@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Reflection.Metadata;
 using System.Text;
 
@@ -22,7 +23,9 @@ namespace ConsoleApp1
         }
         public static decimal GetNumber(string s)
         {
-            return decimal.Parse(s);
+            NumberStyles styles = NumberStyles.AllowDecimalPoint;
+            CultureInfo provider = new CultureInfo("en-US");
+            return Decimal.Parse(s, styles, provider);
         }
         public static decimal OutPut(string s)
         {

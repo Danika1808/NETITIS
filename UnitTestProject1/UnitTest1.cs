@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using ConsoleApp1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject1
@@ -67,7 +68,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void GetNumber()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             string input = "4.4";
             decimal expected = 4.4m;
             decimal result = Calculator.GetNumber(input);
@@ -79,7 +79,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void OutPut()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             string input = "4.8 + 2.8";
             decimal result = Calculator.OutPut(input);
             decimal expected = 7.6m;
