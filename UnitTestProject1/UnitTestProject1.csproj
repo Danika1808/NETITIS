@@ -20,7 +20,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CalculatorConsoleApp\CalculatorConsoleApp.csproj" />
-    <ProjectReference Include="..\ConsoleApp1\CalculatorConsoleApp.csproj" />
+    <ProjectReference Include="../ConsoleApp1/ConsoleApp1.csproj" />
   </ItemGroup>
 </Project>
