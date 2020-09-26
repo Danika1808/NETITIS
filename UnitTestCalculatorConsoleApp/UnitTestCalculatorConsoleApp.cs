@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using CalculatorConsoleApp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace UnitTestCalculatorConsoleApp
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class UnitTestCalculatorConsoleApp
     { /// <summary>
-        /// Тест сложения калькулятора
-        /// </summary>
+      /// Тест сложения калькулятора
+      /// </summary>
         [TestMethod]
         public void Plus_2plus2dot4_4dot4Returned()
         {
@@ -27,7 +26,7 @@ namespace UnitTestCalculatorConsoleApp
         /// Тест вычитания калькулятора
         /// </summary>
         [TestMethod]
-        public void  Minus_17dot4minus5dot5_11dot9Returned()
+        public void Minus_17dot4minus5dot5_11dot9Returned()
         {
             Calculator calculator = new Calculator();
             decimal a = 17.4m;
@@ -51,7 +50,7 @@ namespace UnitTestCalculatorConsoleApp
             double delta = 0.0001;
             double expected = 3.6363;
             decimal result = calculator.Calc(a, b, oper);
-            double actual = (double) result;
+            double actual = (double)result;
             Assert.AreEqual(expected, actual, delta);
         }
         /// <summary>
@@ -100,7 +99,7 @@ namespace UnitTestCalculatorConsoleApp
         [TestMethod]
         public void DivideByZeroException()
         {
-            Calculator calculator = new Calculator(); 
+            Calculator calculator = new Calculator();
             decimal a = 20;
             decimal b = 0;
             string oper = "/";

@@ -19,13 +19,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CalculatorConsoleApp\CalculatorConsoleApp.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="ConsoleApp1">
-      <HintPath>..\CalculatorConsoleApp\bin\Debug\netcoreapp3.1\CalculatorConsoleApp.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\ConsoleApp1\CalculatorConsoleApp.csproj" />
   </ItemGroup>
 </Project>
