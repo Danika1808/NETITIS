@@ -79,7 +79,7 @@ namespace Calculator.Tests
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             string input = "4.4";
             decimal expected = 4.4m;
-            decimal result = Calculator.GetNumber(input);
+            decimal result = calculator.GetNumber(input);
             Assert.AreEqual(expected, result);
         }
         /// <summary>

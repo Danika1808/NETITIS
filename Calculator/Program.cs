@@ -7,10 +7,17 @@ namespace Calculator
     {
         private static void Main()
         {
-            var calculator = new Calculator();
-            var str = Console.ReadLine();
-            var value = calculator.Calc(str);
-            Console.WriteLine(value);
+            try
+            {
+                var calculator = new Calculator();
+                var str = Console.ReadLine();
+                var value = calculator.Calc(str);
+                Console.WriteLine(value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
