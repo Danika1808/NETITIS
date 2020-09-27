@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-namespace ConsoleApp1
+namespace CalculatorConsoleApp
 {
     [ExcludeFromCodeCoverage]
     class Program

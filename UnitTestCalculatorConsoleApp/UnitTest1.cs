@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using ConsoleApp1;
+using CalculatorConsoleApp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace UnitTestProject1
+namespace UnitTestCalculatorConsoleApp
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace ConsoleApp1
+namespace CalculatorConsoleApp
 {
     public class Calculator
     {
