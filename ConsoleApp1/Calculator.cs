@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
-namespace CalculatorConsoleApp
+namespace ConsoleApp1
 {
     public class Calculator
     {
