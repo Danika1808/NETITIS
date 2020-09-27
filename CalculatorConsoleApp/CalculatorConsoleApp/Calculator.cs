@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Reflection.Metadata;
+using System.Globalization;
 using System.Text;
 
 namespace CalculatorConsoleApp
@@ -24,7 +23,7 @@ namespace CalculatorConsoleApp
         {
             NumberStyles styles = NumberStyles.AllowDecimalPoint;
             CultureInfo provider = new CultureInfo("en-US");
-            return Decimal.Parse(s, styles, provider);
+            return decimal.Parse(s, styles, provider);
         }
         public decimal Calc(string s)
         {
