@@ -1,41 +1,37 @@
-using CalculatorConsoleApp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
-namespace UnitTestCalculatorConsoleApp
+using ConsoleApp1;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace UnitTestProject1
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class UnitTest
-    {
-        /// <summary>
+    public class UnitTest1
+    { /// <summary>
         /// Тест сложения калькулятора
         /// </summary>
         [TestMethod]
-        public void Plus_2plus2dot4_4dot4Returned()
+        public void Plus()
         {
-            Calculator calculator = new Calculator();
             decimal a = 2;
             decimal b = 2.4m;
             string oper = "+";
             decimal expected = 4.4m;
-            decimal result = calculator.Calc(a, b, oper);
+            decimal result = Calculator.Calc(a, b, oper);
             Assert.AreEqual(expected, result);
         }
         /// <summary>
         /// Тест вычитания калькулятора
         /// </summary>
         [TestMethod]
-        public void Minus_17dot4minus5dot5_11dot9Returned()
+        public void Minus()
         {
-            Calculator calculator = new Calculator();
             decimal a = 17.4m;
             decimal b = 5.5m;
             string oper = "-";
             decimal expected = 11.9m;
-            decimal result = calculator.Calc(a, b, oper);
+            decimal result = Calculator.Calc(a, b, oper);
             Assert.AreEqual(expected, result);
         }
 
@@ -43,30 +39,26 @@ namespace UnitTestCalculatorConsoleApp
         /// Тест деления калькулятора
         /// </summary>
         [TestMethod]
-        public void Devide_20devide5dot5_3dot6363Returned()
+        public void Devide()
         {
-            Calculator calculator = new Calculator();
             decimal a = 20;
             decimal b = 5.5m;
             string oper = "/";
-            double delta = 0.0001;
-            double expected = 3.6363;
-            decimal result = calculator.Calc(a, b, oper);
-            double actual = (double)result;
-            Assert.AreEqual(expected, actual, delta);
+            decimal expected = 3.6363636363636363636363636364m;
+            decimal result = Calculator.Calc(a, b, oper);
+            Assert.AreEqual(expected, result);
         }
         /// <summary>
         /// Тест умножения калькулятора
         /// </summary>
         [TestMethod]
-        public void Multiply_6dot3multiply6dot3_39dot69Returned()
+        public void Multiply()
         {
-            Calculator calculator = new Calculator();
             decimal a = 6.3m;
             decimal b = 6.3m;
             string oper = "*";
             decimal expected = 39.69m;
-            decimal result = calculator.Calc(a, b, oper);
+            decimal result = Calculator.Calc(a, b, oper);
             Assert.AreEqual(expected, result);
         }
         /// <summary>
@@ -75,11 +67,10 @@ namespace UnitTestCalculatorConsoleApp
         [TestMethod]
         public void GetNumber()
         {
-            Calculator calculator = new Calculator();
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             string input = "4.4";
             decimal expected = 4.4m;
-            decimal result = calculator.GetNumber(input);
+            decimal result = Calculator.GetNumber(input);
             Assert.AreEqual(expected, result);
         }
         /// <summary>
@@ -88,36 +79,21 @@ namespace UnitTestCalculatorConsoleApp
         [TestMethod]
         public void OutPut()
         {
-            Calculator calculator = new Calculator();
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             string input = "4.8 + 2.8";
-            decimal result = calculator.Calc(input);
+            decimal result = Calculator.OutPut(input);
             decimal expected = 7.6m;
             Assert.AreEqual(expected, result);
         }
-
         /// <summary>
         /// Тест исключения деление на нуль
         /// </summary>
         [TestMethod]
-        public void DivideByZeroException()
-        {
-            Calculator calculator = new Calculator();
-            decimal a = 20;
-            decimal b = 0;
-            string oper = "/";
-            Assert.ThrowsException<DivideByZeroException>(() => calculator.Calc(a, b, oper));
-        }
-
+        public void ExpDevide() => Assert.ThrowsException<DivideByZeroException>(() => Calculator.Calc(2.0m, 0.0m, "/"));
+        /// <summary>
         /// Тест исключения неизвестная операция
         /// </summary>
         [TestMethod]
-        public void KeyNotFoundException()
-        {
-            Calculator calculator = new Calculator();
-            decimal a = 18;
-            decimal b = 21;
-            string oper = "f";
-            Assert.ThrowsException<KeyNotFoundException>(() => calculator.Calc(a, b, oper));
-        }
+        public void ExpOper() => Assert.ThrowsException<KeyNotFoundException>(() => Calculator.Calc(2.0m, 2.0m, "f"));
     }
 }
