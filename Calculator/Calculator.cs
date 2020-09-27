@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace ConsoleApp1
+namespace Calculator
 {
     public class Calculator
     {
-        private readonly Dictionary<string, Func<decimal, decimal, decimal>> CalculatorOperations =
+        private readonly Dictionary<string, Func<decimal, decimal, decimal>> _calculatorOperations =
             new Dictionary<string, Func<decimal, decimal, decimal>>()
             {
                 {"+", (a, b) => a + b },
@@ -16,12 +16,12 @@ namespace ConsoleApp1
             };
         public decimal Calc(decimal arg1, decimal arg2, string oper)
         {
-            return CalculatorOperations[oper](arg1, arg2);
+            return _calculatorOperations[oper](arg1, arg2);
         }
-        public decimal GetNumber(string s)
+        public static decimal GetNumber(string s)
         {
-            NumberStyles styles = NumberStyles.AllowDecimalPoint;
-            CultureInfo provider = new CultureInfo("en-US");
+            const NumberStyles styles = NumberStyles.AllowDecimalPoint;
+            var provider = new CultureInfo("en-US");
             return decimal.Parse(s, styles, provider);
         }
         public decimal Calc(string s)
