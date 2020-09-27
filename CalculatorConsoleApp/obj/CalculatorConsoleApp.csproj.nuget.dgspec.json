@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj": {}
+    "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj": {
+    "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj",
         "projectName": "CalculatorConsoleApp",
-        "projectPath": "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj",
+        "projectPath": "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\CalculatorConsoleApp\\CalculatorConsoleApp.csproj",
         "packagesPath": "C:\\Users\\danik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\CalculatorConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\CalculatorConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

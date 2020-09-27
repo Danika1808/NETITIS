@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2tf+w9w1c0wE2zKGIBiKU7XHVj/NdDPvhzHcp2R6KdftCrlno8gsU3vNeLQBVWJcbNlt7eV6mxLNzL+JW9ui6Q==",
+  "dgSpecHash": "uh1vXXWWuHf8sdlswfhm5xt17Og+z8zNVYk+aZfSHP7eMCzZ4JRM1lijSL42wp+NbDe7e7tLkFEMl11ebqmzWw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\danik\\source\\repos\\CalculatorConsoleApp\\UnitTestCalculator\\UnitTestCalculator.csproj",
+  "projectFilePath": "C:\\Users\\danik\\OneDrive\\Documents\\GIthub\\NETITIS\\UnitTestCalculator\\UnitTestCalculator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danik\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\danik\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
