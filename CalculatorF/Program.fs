@@ -1,22 +1,30 @@
 ﻿open System
 open System.Globalization
+
 type MaybeBuilder() =
     member this.Bind(x, f) = 
         match x with
         | None -> None
         | Some a -> f a
+        
     member this.Return(x) = 
-        Some x   
+        Some x
+        
 let maybe = MaybeBuilder()
+
 let add  x y = x + y
+
 let subtract x y = x - y
+
 let multiply x y = x * y
+
 let divide x y = maybe{
     let! x = match y with
     | 0.0 -> None
     | _ -> Some (x / y)
     return x
     }
+
 let calculate op x y =  maybe{
         let! x = match op with
             | "+" -> Some(add x y)
@@ -27,12 +35,15 @@ let calculate op x y =  maybe{
         return x
     }
 let styles = NumberStyles.AllowDecimalPoint
+
 let provider = new CultureInfo("en-US")
+
 let output  (result : float option)  =
     if
         result = None then Console.WriteLine("Введено неверное число/оператор или попытка деления на нуль")
     else
-        Console.WriteLine(result)   
+        Console.WriteLine(result.Value)
+        
 let getNumber (str:string) = maybe{
          let isNumber, number = Double.TryParse(str, styles, provider)
          let! str = match isNumber with
