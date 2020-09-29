@@ -1,7 +1,5 @@
 ﻿open System
-open System.Diagnostics.CodeAnalysis
 open System.Globalization
-open System.Net
 
 type MaybeBuilder() =
     member this.Bind(x, f) = 
