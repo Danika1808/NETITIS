@@ -39,10 +39,9 @@ let styles = NumberStyles.AllowDecimalPoint
 let provider = new CultureInfo("en-US")
 
 let output  (result : float option)  =
-    if
-        result = None then Console.WriteLine("Введено неверное число/оператор или попытка деления на нуль")
-    else
-        Console.WriteLine(result.Value)
+    match result with
+        | None -> Console.WriteLine("Mission Failed we'll get em next time")
+        | Some result -> Console.WriteLine(result)
         
 let getNumber (str:string) = maybe{
          let isNumber, number = Double.TryParse(str, styles, provider)
@@ -57,9 +56,11 @@ let main argv =
     let a = getNumber(Console.ReadLine())
     let op = Console.ReadLine()
     let b = getNumber(Console.ReadLine())
-    if a = None || b = None then output None else 
-        let result = calculate op a.Value b.Value
-        output result
+    let result = maybe{
+        let! calc = calculate op a.Value b.Value
+        return calc
+    }
+    output result
     0    
    
  
