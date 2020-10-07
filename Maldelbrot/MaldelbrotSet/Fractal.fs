@@ -5,12 +5,6 @@ open System.Numerics
 open System
 let temp c f size k = f - (size / 2.0) + (float c) * size / k 
 
-let p x y = sqrt(Math.Pow(x-0.25,2.0) + Math.Pow(y,2.0))
-
-let q x y = Math.Atan2(y, x- 0.25)
-
-let pc q = 0.5-0.5*cos q
-
 let createImage sizeArea heigth wight hx hy =
     let image = new Bitmap((int heigth), (int wight))
     for x in 0..image.Width-1 do

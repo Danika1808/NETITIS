@@ -6,16 +6,16 @@ namespace Maldelbrot_app
 {
     public partial class Form1 : Form
     {
-        private double hx, hy;
-        private Bitmap bmp;
-        private double sizeArea;
+        private double _hx, _hy;
+        private Bitmap _bmp;
+        private double _sizeArea = 3;
+        private readonly double _zoom = 1.1;
 
         private void button1_Click(object sender, EventArgs e)
         {
             Draw();
             timer1.Start();
         }
-
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -24,8 +24,8 @@ namespace Maldelbrot_app
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    hx = Fractal.temp(X, hx, sizeArea, pictureBox1.Width);
-                    hy = Fractal.temp(Y, hy, sizeArea, pictureBox1.Height);
+                    _hx = Fractal.temp(X, _hx, _sizeArea, pictureBox1.Width);
+                    _hy = Fractal.temp(Y, _hy, _sizeArea, pictureBox1.Height);
                     Draw();
                     break;
             }
@@ -33,7 +33,7 @@ namespace Maldelbrot_app
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            sizeArea /= 1.1;
+            _sizeArea /= _zoom;
             Draw();
         }
 
@@ -41,16 +41,14 @@ namespace Maldelbrot_app
         {
             InitializeComponent();
 
-            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            pictureBox1.Image = bmp;
-
-            sizeArea = 3;
+            _bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = _bmp;
         }
 
         private void Draw()
         {
-            bmp = Fractal.createImage(sizeArea, pictureBox1.Height, pictureBox1.Width, hx, hy);
-            pictureBox1.Image = bmp;
+            _bmp = Fractal.createImage(_sizeArea, pictureBox1.Height, pictureBox1.Width, _hx, _hy);
+            pictureBox1.Image = _bmp;
         }
     }
 }
