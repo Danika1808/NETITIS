@@ -1,55 +1,35 @@
-﻿open System.Drawing
+﻿module Fractal
+open System.Drawing
 open System.Windows.Forms
+open System.Numerics
 open System
+let temp c f size k = f - (size / 2.0) + (float c) * size / k 
 
-type VizualizeForm () =
-    inherit Form ()
-    override this.OnLoad (e : EventArgs) =
-        this.DoubleBuffered <- true
+let p x y = sqrt(Math.Pow(x-0.25,2.0) + Math.Pow(y,2.0))
 
-let MapToRange inMin inMax outMin outMax x =
-    (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+let q x y = Math.Atan2(y, x- 0.25)
 
-let form = new VizualizeForm(MaximizeBox = true, Text = "Mandelbrot Set Visualization", Width = 480, Height = 360)
-let mutable size = (double)1.0
-let maxIterations sz =
-    (int)(100.0 / (sqrt sz))
+let pc q = 0.5-0.5*cos q
 
-let rec mandelbrotFunction iterations a b ca cb maxIter =
-                if iterations < maxIter && a*a + b*b < ((double)4.0) then
-                    let asquare = a*a - b*b
-                    let bsquare = ((double)2.0)*a*b
-                    mandelbrotFunction (iterations+1) (asquare + ca) (bsquare + cb) ca cb maxIter
-                else
-                    iterations
-                   
-let mutable startx = -((double)0.73)
-let mutable starty = -((double)0.18)
-let vizualizeSet (e : PaintEventArgs) =
-    let g = e.Graphics
-    g.Clear(Color.Black)
-    let currentMaxIterations = maxIterations size
-    for x in 0..form.Width do
-        for y in 1..form.Height do
-            let a = startx + MapToRange ((double)0.0) ((double)form.Width) -size size ((double)x)
-            let b = starty + MapToRange ((double)0.0) ((double)form.Height) -size size ((double)y)
-            let iterations = mandelbrotFunction 0 a b a b currentMaxIterations
-            let brightness =
-                match iterations with
-                | _ when iterations = currentMaxIterations -> 0
-                | _ -> (int)((double)(iterations) |> MapToRange 0.0 ((double)currentMaxIterations) 0.0 255.0)
-            g.FillRectangle(new SolidBrush(Color.FromArgb((brightness + 10)%255, (brightness * 2)%255, (brightness + 40)%255)), x, y, 1, 1)
-            
+let createImage sizeArea heigth wight hx hy =
+    let image = new Bitmap((int heigth), (int wight))
+    for x in 0..image.Width-1 do
+        for y in 0..image.Height-1 do
+            let mutable x_ = temp x hx sizeArea wight
+            let mutable y_ = temp y hy sizeArea heigth
+            let mutable z = new Complex(0.0, 0.0)
+            let mutable it = 0
+            let mutable Break = false
+            while (Break = false && it < 100) do
+                it <- it + 1
+                z <- z*z
+                z <- z + new Complex(x_, y_)
+                if (z.Magnitude > 2.0) then Break <- true 
+                else 
+                    image.SetPixel(x, y, Color.FromArgb(255, it % 8 * 16, it % 4 * 32, it % 2 * 64))
+    image
+
+
+
             
 
-form.Paint.Add vizualizeSet
-
-async { 
-while true do
-  do! Async.Sleep(1)
-  form.Invalidate()
-  size <- (size * 0.9)
-  printf "%d " (maxIterations size)
-} |> Async.StartImmediate
-
-Application.Run form
