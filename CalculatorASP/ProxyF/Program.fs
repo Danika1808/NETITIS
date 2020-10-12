@@ -16,14 +16,14 @@ let maybe = new MaybeBuilder()
 type AsyncMaybeBuilder () =
     member this.Bind(x, f) =
         async {
-            let! _x = x
-            match _x with
+            let! x' = x
+            match x' with
             | Some s -> return! f s
             | None -> return None
             }
 
-    member this.Return(x:'a option) =
-        async{return x}
+    member this.Return x' =
+        async{return x'}
 
 let asyncMaybe = new AsyncMaybeBuilder()
 
