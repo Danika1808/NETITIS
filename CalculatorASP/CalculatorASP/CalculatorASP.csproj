@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Calculator\Calculator.csproj" />
-    <ProjectReference Include="..\CalculatorProxy\Calculator.DesignPatterns.Proxy.fsproj" />
   </ItemGroup>
 
 </Project>
