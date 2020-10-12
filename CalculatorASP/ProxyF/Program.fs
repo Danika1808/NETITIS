@@ -29,11 +29,6 @@ let asyncMaybe = new AsyncMaybeBuilder()
 
 let checkAccess input =
     Regex.IsMatch(input, @"(-?\d+(?:\.\d+)?)\s*([-%2B*%2F])\s*(-?\d+(?:\.\d+)?)")
-
-let output  (result : float option)  =
-    match result with
-        | None -> Console.WriteLine("Mission Failed we'll get em next time")
-        | Some result -> Console.WriteLine(result)
         
 let getOper op = 
     match op with
