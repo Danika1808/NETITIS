@@ -1,17 +1,7 @@
 ﻿open System
-open System.Net
 open System.Text.RegularExpressions;
-open System.IO
+open System.Net.Http
 
-type MaybeBuilder() =
-    member this.Bind(x,f)=
-        match x with
-        |None -> None
-        |Some a -> f a
-    member this.Return(x)=
-        Some x
-
-let maybe = new MaybeBuilder()
 
 type AsyncMaybeBuilder () =
     member this.Bind(x, f) =
@@ -22,15 +12,15 @@ type AsyncMaybeBuilder () =
             | None -> return None
             }
 
-    member this.Return x' =
-        async{return x'}
+    member this.Return x =
+        async{return x}
 
 let asyncMaybe = new AsyncMaybeBuilder()
 
 let checkAccess input =
-    Regex.IsMatch(input, @"(-?\d+(?:\.\d+)?)\s*([-%2B*%2F])\s*(-?\d+(?:\.\d+)?)")
+    Regex.IsMatch(input, @"(-?\d+(?:\.\d+)?)\s*([-]?[*]?[%2B]?[%2F]?)\s(-?\d+(?:\.\d+)?)")
         
-let getOper op = 
+let GetOper op = 
     match op with
     | "+" -> "%2B"
     | "*" -> "*"
@@ -38,27 +28,32 @@ let getOper op =
     | "-" -> "-"
     | _ -> ""
 
-let giveRequest expression = async{
+let StatusCode (responce: HttpResponseMessage) = 
+    asyncMaybe{
+        return 
+            match responce.IsSuccessStatusCode with
+                |true ->Some (responce.Con)
+                |false -> None
+    }
 
-    let request = WebRequest.Create("http://localhost:51963?value=" + expression, Method = "GET", ContentType = "text/plain")
-    let response  = request.GetResponse()
-    let stream = response.GetResponseStream();
-    let readStream = new StreamReader(stream)
-    return readStream.ReadToEnd()
+let GiveRequest expression = async{
+
+    let client = new HttpClient()
+    let! response = client.GetAsync("http://localhost:51963?value=" + expression) |> Async.AwaitTask
+    let! statusCode = StatusCode response
+    return Some(statusCode)
     }
 
 let RunCalculator expression =
-    let result = Async.RunSynchronously(giveRequest expression)
-    result
+    let result = Async.RunSynchronously(GiveRequest expression)
+    Console.WriteLine(result.Value)
 
 [<EntryPoint>]
 let main argv = 
     let a = Console.ReadLine()
-    let op = getOper(Console.ReadLine())
+    let op = GetOper(Console.ReadLine())
     let b = Console.ReadLine()
     let expression = a + " " + op + " " + b;
-    let result = match checkAccess expression with
-    | true -> RunCalculator expression
-    | false -> "Bad request"
-    printf"%s"result
+    if checkAccess expression then RunCalculator expression
+    else Console.WriteLine("Bad Request");
     0     

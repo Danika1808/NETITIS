@@ -17,8 +17,9 @@ namespace CalculatorASP
             var calclulator = new Calculator.Calculator();
             Result.Value = calclulator.Calc(value);
             await _next.Invoke(context);
-        }
+        }     
     }
+
     public static class TokenExtensions
     {
         public static IApplicationBuilder UseToken(this IApplicationBuilder builder)
