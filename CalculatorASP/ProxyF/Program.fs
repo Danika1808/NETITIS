@@ -33,7 +33,8 @@ let GiveRequest expression = async{
     let client = new HttpClient()
     let! response = client.GetAsync("http://localhost:51963?value=" + expression) |> Async.AwaitTask
     let! content = response.Content.ReadAsStringAsync() |> Async.AwaitTask
-    let result = match response.IsSuccessStatusCode with
+    let result = 
+        match response.IsSuccessStatusCode with
         |true -> Some(content)
         |false -> None
     return result
@@ -49,7 +50,8 @@ let main argv =
     let op = GetOper(Console.ReadLine())
     let b = Console.ReadLine()
     let expression = a + " " + op + " " + b;
-    let result = match checkAccess expression with
+    let result = 
+        match checkAccess expression with
         | true -> Async.RunSynchronously(GiveRequest expression) |> Some
         | false -> None
     output result.Value
