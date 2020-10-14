@@ -28,32 +28,29 @@ let GetOper op =
     | "-" -> "-"
     | _ -> ""
 
-let StatusCode (responce: HttpResponseMessage) = 
-    asyncMaybe{
-        return 
-            match responce.IsSuccessStatusCode with
-                |true ->Some (responce.Con)
-                |false -> None
-    }
-
 let GiveRequest expression = async{
 
     let client = new HttpClient()
     let! response = client.GetAsync("http://localhost:51963?value=" + expression) |> Async.AwaitTask
-    let! statusCode = StatusCode response
-    return Some(statusCode)
+    let! content = response.Content.ReadAsStringAsync() |> Async.AwaitTask
+    let result = match response.IsSuccessStatusCode with
+        |true -> Some(content)
+        |false -> None
+    return result
     }
 
-let RunCalculator expression =
-    let result = Async.RunSynchronously(GiveRequest expression)
-    Console.WriteLine(result.Value)
-
+let output (result : string option) =
+    match result with
+        | None -> Console.WriteLine("Bad Request")
+        | Some result -> Console.WriteLine(result)
 [<EntryPoint>]
 let main argv = 
     let a = Console.ReadLine()
     let op = GetOper(Console.ReadLine())
     let b = Console.ReadLine()
     let expression = a + " " + op + " " + b;
-    if checkAccess expression then RunCalculator expression
-    else Console.WriteLine("Bad Request");
-    0     
+    let result = match checkAccess expression with
+        | true -> Async.RunSynchronously(GiveRequest expression) |> Some
+        | false -> None
+    output result.Value
+    0
