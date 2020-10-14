@@ -2,7 +2,6 @@
 open System.Text.RegularExpressions;
 open System.Net.Http
 
-
 type AsyncMaybeBuilder () =
     member this.Bind(x, f) =
         async {
