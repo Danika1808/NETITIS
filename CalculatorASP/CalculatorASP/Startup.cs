@@ -23,7 +23,7 @@ public class Startup
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync($"{Result.Value}");
+                await context.Response.WriteAsync("HelloWorld");
             });
         }
     }

@@ -15,7 +15,6 @@ namespace CalculatorASP
         {
             var value = context.Request.Query["value"];
             var calclulator = new Calculator.Calculator();
-            Result.Value = calclulator.Calc(value);
             await _next.Invoke(context);
         }     
     }
