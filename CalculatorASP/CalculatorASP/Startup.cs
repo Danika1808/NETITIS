@@ -20,11 +20,6 @@ public class Startup
         public void Configure(IApplicationBuilder app)
         {
             app.UseToken();
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("HelloWorld");
-            });
         }
     }
 }
