@@ -7,9 +7,10 @@ namespace ExpressionTree
     {
         static void Main()
         {
-            var n = "6/12*7+8*9";
+            var n = "12/(3+2)*7+8*9";
             ParseToTree parseToTree = new ParseToTree();
-            parseToTree.Parse(n);
+            var result = parseToTree.Parse(n);
+            Console.WriteLine(result);
         }
     }
 }

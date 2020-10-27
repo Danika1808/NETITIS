@@ -1,57 +1,40 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace ExpressionTree
 {
     public class ParseToTree
     {
-        public static Stack<Expression> expList = new Stack<Expression>();
         public Expression Parse(string input)
         {
-            if (input.LastIndexOf('+') != -1)
+            if (input.LastIndexOf('+') != -1 && (input.LastIndexOf('+') < input.LastIndexOf('(') || input.LastIndexOf('+') > input.LastIndexOf(')')))
             {
-                return Expression.MakeBinary(ExpressionType.Add, Parse(input.Substring(0, input.LastIndexOf('+'))), Parse(input.Substring(input.LastIndexOf('+') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+                return Expression.MakeBinary(ExpressionType.Add, Parse(input.Substring(0, input.LastIndexOf('+'))), Parse(input.Substring(input.LastIndexOf('+') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));   
             }
-            else if (input.LastIndexOf('-') != -1)
+            else if (input.LastIndexOf('-') != -1 && (input.LastIndexOf('-') < input.LastIndexOf('(') || input.LastIndexOf('-') > input.LastIndexOf(')')))
             {
-                return Expression.MakeBinary(ExpressionType.Subtract, Parse(input.Substring(0, input.LastIndexOf('-'))), Parse(input.Substring(input.LastIndexOf('-') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+                return Expression.MakeBinary(ExpressionType.Subtract, Parse(input.Substring(0, input.LastIndexOf('-'))), Parse(input.Substring(input.LastIndexOf('-') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));
             }
             else if (input.IndexOf('/') != -1)
             {
-                return Expression.MakeBinary(ExpressionType.Divide, Parse(input.Substring(0, input.LastIndexOf('/'))), Parse(input.Substring(input.LastIndexOf('/') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+                if (Math.Abs(input.IndexOf('/') - input.IndexOf('(')) == 1)
+                    return Expression.MakeBinary(ExpressionType.Divide, Parse(input.Substring(0, input.LastIndexOf('/'))), Parse(input.Substring(input.LastIndexOf('('), input.LastIndexOf(')'))), false, typeof(Responce).GetMethod("GetPesponsing"));
+                else if (Math.Abs(input.IndexOf('/') - input.IndexOf(')')) == 1)
+                    return Expression.MakeBinary(ExpressionType.Divide, Parse(input.Substring(input.LastIndexOf('(') + 1, input.LastIndexOf(')') - 1)), Parse(input.Substring(input.LastIndexOf('/') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));
+
+                else return Expression.MakeBinary(ExpressionType.Divide, Parse(input.Substring(0, input.LastIndexOf('/'))), Parse(input.Substring(input.LastIndexOf('/') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));
             }
             else if (input.IndexOf('*') != -1)
             {
-                return Expression.MakeBinary(ExpressionType.Multiply, Parse(input.Substring(0, input.LastIndexOf('*'))), Parse(input.Substring(input.LastIndexOf('*') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+                if (Math.Abs(input.IndexOf('*') - input.IndexOf('(')) == 1)
+                    return Expression.MakeBinary(ExpressionType.Multiply, Parse(input.Substring(0, input.LastIndexOf('*'))), Parse(input.Substring(input.LastIndexOf('('), input.LastIndexOf(')'))), false, typeof(Responce).GetMethod("GetPesponsing"));
+                else if (Math.Abs(input.IndexOf('*') - input.IndexOf(')')) == 1)
+                    return Expression.MakeBinary(ExpressionType.Multiply, Parse(input.Substring(input.LastIndexOf('(') + 1, input.LastIndexOf(')') - 1)), Parse(input.Substring(input.LastIndexOf('*') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));
+
+                else return Expression.MakeBinary(ExpressionType.Multiply, Parse(input.Substring(0, input.LastIndexOf('*'))), Parse(input.Substring(input.LastIndexOf('*') + 1)), false, typeof(Responce).GetMethod("GetPesponsing"));
             }
             else
                 return Expression.Constant(int.Parse(input));
-        }
-        public void GetExpression()
-        {
-
-        }
-        static int GetPriority(char action)
-        {
-            switch (action)
-            {
-                case '*':
-                case '/': return 2;
-                case '+':
-                case '-': return 1;
-            }
-            return 0;
-        }
-        static bool SearchOper(string input)
-        {
-            return input.IndexOf('+') == -1 ||
-                input.IndexOf('-') == -1 ||
-                input.IndexOf('/') == -1 ||
-                input.IndexOf('*') == -1;
-
         }
     }
 }
