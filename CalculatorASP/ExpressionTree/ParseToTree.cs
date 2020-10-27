@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace ExpressionTree
 {
-    public class ParseToTree
+    static public class ParseToTree
     {
-        public Expression Parse(string input)
+        public static Expression Parse(string input)
         {
             //Заметили плюс
             if (input.LastIndexOf('+') != -1 && (input.LastIndexOf('+') < input.LastIndexOf('(') || input.LastIndexOf('+') > input.LastIndexOf(')')))
