@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorASP", "Calculator
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "..\Calculator\Calculator.csproj", "{84C2F09B-E7D2-4214-AAE0-6E3F20F103F3}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ProxyF", "ProxyF\ProxyF.fsproj", "{69E6A6AB-C19A-4243-8C9C-9B9EAB919092}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTree", "ExpressionTree\ExpressionTree.csproj", "{975FBF2D-37A1-4F87-BB2C-E42F3FD6715C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionTree", "ExpressionTree\ExpressionTree.csproj", "{975FBF2D-37A1-4F87-BB2C-E42F3FD6715C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{84C2F09B-E7D2-4214-AAE0-6E3F20F103F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84C2F09B-E7D2-4214-AAE0-6E3F20F103F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84C2F09B-E7D2-4214-AAE0-6E3F20F103F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69E6A6AB-C19A-4243-8C9C-9B9EAB919092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69E6A6AB-C19A-4243-8C9C-9B9EAB919092}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69E6A6AB-C19A-4243-8C9C-9B9EAB919092}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69E6A6AB-C19A-4243-8C9C-9B9EAB919092}.Release|Any CPU.Build.0 = Release|Any CPU
 		{975FBF2D-37A1-4F87-BB2C-E42F3FD6715C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{975FBF2D-37A1-4F87-BB2C-E42F3FD6715C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{975FBF2D-37A1-4F87-BB2C-E42F3FD6715C}.Release|Any CPU.ActiveCfg = Release|Any CPU

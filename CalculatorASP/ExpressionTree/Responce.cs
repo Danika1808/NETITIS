@@ -6,7 +6,7 @@ namespace ExpressionTree
 {
     class Responce
     {  
-        public static string GetPesponsing(string a, string b, string oper)
+        public static string GetPesponsing(Expression a, Expression b, string oper)
         {
             oper = oper switch
             {
@@ -16,7 +16,7 @@ namespace ExpressionTree
                 "*" => "*",
                 _ => throw new NotImplementedException()
             };
-            string expression = a + oper + b;
+            string expression = a.ToString() + oper + b.ToString();
             HttpClient client = new HttpClient();
             var responce = client.GetAsync("http://localhost:51963?value=" + expression).Result;
             var content = responce.Content.ReadAsStringAsync().Result;

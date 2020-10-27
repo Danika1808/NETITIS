@@ -1,34 +1,58 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace ExpressionTree
 {
-    public class Cell
+    public class ParseToTree
     {
-        public double Value { get; set; }
-        public char Action { get; set; }
-        public Cell(double value, char action)
+        public static Stack<Expression> expList = new Stack<Expression>();
+        public Expression Parse(string input)
         {
-            Value = value;
-            Action = action;
+            if (input.LastIndexOf('+') != -1)
+            {
+                return Expression.MakeBinary(ExpressionType.Add, Parse(input.Substring(0, input.LastIndexOf('+'))), Parse(input.Substring(input.LastIndexOf('+') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+            }
+            else if (input.LastIndexOf('-') != -1)
+            {
+                return Expression.MakeBinary(ExpressionType.Subtract, Parse(input.Substring(0, input.LastIndexOf('-'))), Parse(input.Substring(input.LastIndexOf('-') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+            }
+            else if (input.IndexOf('/') != -1)
+            {
+                return Expression.MakeBinary(ExpressionType.Divide, Parse(input.Substring(0, input.LastIndexOf('/'))), Parse(input.Substring(input.LastIndexOf('/') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+            }
+            else if (input.IndexOf('*') != -1)
+            {
+                return Expression.MakeBinary(ExpressionType.Multiply, Parse(input.Substring(0, input.LastIndexOf('*'))), Parse(input.Substring(input.LastIndexOf('*') + 1)), false, typeof(Responce).GetMethod("GetResponsiPlus"));
+            }
+            else
+                return Expression.Constant(int.Parse(input));
+        }
+        public void GetExpression()
+        {
+
         }
         static int GetPriority(char action)
         {
             switch (action)
             {
-                case '^': return 4;
                 case '*':
-                case '/': return 3;
+                case '/': return 2;
                 case '+':
-                case '-': return 2;
+                case '-': return 1;
             }
             return 0;
         }
-        static bool CanMergeCells(Cell leftCell, Cell rightCell)
+        static bool SearchOper(string input)
         {
-            return GetPriority(leftCell.Action) >= GetPriority(rightCell.Action);
-        }
+            return input.IndexOf('+') == -1 ||
+                input.IndexOf('-') == -1 ||
+                input.IndexOf('/') == -1 ||
+                input.IndexOf('*') == -1;
 
+        }
     }
 }
+
