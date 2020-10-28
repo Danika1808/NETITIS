@@ -95,7 +95,7 @@ namespace ExpressionTree
                 }
             }
             else
-                return Expression.Constant(int.Parse(input));
+                return Expression.Constant(Calc.GetNumber(input));
         }
     }
 }

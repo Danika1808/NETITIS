@@ -18,7 +18,7 @@ namespace Calculator
         {
             return _calculatorOperations[oper](arg1, arg2);
         }
-        public decimal GetNumber(string s)
+        public static decimal GetNumber(string s)
         {
             const NumberStyles styles = NumberStyles.AllowDecimalPoint;
             var provider = new CultureInfo("en-US");
