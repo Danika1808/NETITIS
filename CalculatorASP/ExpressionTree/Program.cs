@@ -12,7 +12,6 @@ namespace ExpressionTree
             Expression result = ParseToTree.Parse(n);
             Calc calc = new Calc();
             Console.WriteLine(await calc.Calculate(result));
-
         }
     }
 }

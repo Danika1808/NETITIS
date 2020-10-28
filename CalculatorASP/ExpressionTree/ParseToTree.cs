@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ExpressionTree
 {
-    static public class ParseToTree
+    public static class ParseToTree
     {
         public static Expression Parse(string input)
         {
