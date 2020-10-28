@@ -7,6 +7,8 @@ namespace CalculatorASP
 {
     public class CalculatorMiddleware
     {
+        private readonly RequestDelegate _next;
+
         public CalculatorMiddleware(RequestDelegate next) => _next = next;        
 
         public async Task InvokeAsync(HttpContext context)
