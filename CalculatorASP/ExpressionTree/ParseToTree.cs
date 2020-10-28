@@ -89,7 +89,7 @@ namespace ExpressionTree
                     return Expression.MakeBinary
                         (
                         ExpressionType.Multiply,
-                        Parse(input.Substring(0, input.LastIndexOf('*'))), 
+                        Parse(input.Substring(0, input.LastIndexOf('*'))),
                         Parse(input.Substring(input.LastIndexOf('*') + 1))
                         );
                 }
