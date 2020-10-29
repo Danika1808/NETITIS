@@ -9,7 +9,7 @@ namespace ExpressionTree
 {
     class Calc
     {
-        async public Task<decimal> Calculate(Expression input)
+        static async public Task<decimal> Calculate(Expression input)
         {
             var result = await BinaryVisitor.VisitAsync(input);
             return result;

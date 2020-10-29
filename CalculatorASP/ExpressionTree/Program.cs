@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -6,12 +9,11 @@ namespace ExpressionTree
 {
     class Program
     {
-        static async Task Main()
+        static async Task Main(string[] args)
         {
-            var n = "12.1/(3.2+2)*7.96+8.14*9.5";
-            Expression result = ParseToTree.Parse(n);
-            Calc calc = new Calc();
-            Console.WriteLine(await calc.Calculate(result));
+            var n = "5+(7-2,2*3)*(6-4)/2";
+            var tree = ParseToTree.ParsingExpression(n);
+            Console.WriteLine(await Calc.Calculate(tree));
         }
     }
 }

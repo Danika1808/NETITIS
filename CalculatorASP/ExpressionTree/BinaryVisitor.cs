@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace ExpressionTree
                 {
                     case ExpressionType.Add:
                         {
-                            operation = "+";
+                            operation = "%2B";
                             break;
                         }
                     case ExpressionType.Subtract:
@@ -53,7 +54,7 @@ namespace ExpressionTree
                         }
                     case ExpressionType.Divide:
                         {
-                            operation = "/";
+                            operation = "%2F";
                             break;
                         }
                     default:
@@ -66,8 +67,12 @@ namespace ExpressionTree
                 var right = Task.Run(() => VisitAsync(binaryNode.Right));
                 var tasks = await Task.WhenAll(new[] { left, right });
                 await Task.Yield();
-                var result = Responce.GetPesponsing(tasks[0], tasks[1], operation);
-                return Calc.GetNumber(result);
+                var expression = tasks[0] + "+" + operation + "+" + tasks[1];
+                expression = expression.Replace(',', '.');
+                HttpClient client = new HttpClient();
+                var responce = await client.GetAsync("http://localhost:51963?value=" + expression);
+                var content = await responce.Content.ReadAsStringAsync();
+                return decimal.Parse(content);
             }
 
         }

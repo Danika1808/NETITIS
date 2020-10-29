@@ -1,102 +1,111 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace ExpressionTree
 {
     public static class ParseToTree
     {
-        public static Expression Parse(string input)
+        public static Stack<Expression> expList = new Stack<Expression>();//Constant
+        public static Stack<ConstantExpression> opExpList = new Stack<ConstantExpression>();//MakeTree
+        public static Expression ParsingExpression(string exp)
         {
-            //Заметили плюс
-            if (input.LastIndexOf('+') != -1 && (input.LastIndexOf('+') < input.LastIndexOf('(') || input.LastIndexOf('+') > input.LastIndexOf(')')))
+            opExpList.Push(Expression.Constant('('));
+            int pos = 0;
+            while (pos <= exp.Length)
             {
-                return Expression.MakeBinary
-                    (
-                    ExpressionType.Add,
-                    Parse(input.Substring(0, input.LastIndexOf('+'))),
-                    Parse(input.Substring(input.LastIndexOf('+') + 1))
-                    );
-            }
-            //Заметили минус
-            else if (input.LastIndexOf('-') != -1 && (input.LastIndexOf('-') < input.LastIndexOf('(') || input.LastIndexOf('-') > input.LastIndexOf(')')))
-            {
-                return Expression.MakeBinary
-                    (
-                    ExpressionType.Subtract,
-                    Parse(input.Substring(0, input.LastIndexOf('-'))),
-                    Parse(input.Substring(input.LastIndexOf('-') + 1))
-                    );
-            }
-            //Заметили делить
-            else if (input.IndexOf('/') != -1)
-            {
-                //Делить перед открывающийся скобкой
-                if (Math.Abs(input.IndexOf('/') - input.IndexOf('(')) == 1)
+                if (pos == exp.Length || exp[pos] == ')')
                 {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Divide,
-                        Parse(input.Substring(0, input.LastIndexOf('/'))),
-                        Parse(input.Substring(input.LastIndexOf('('), input.LastIndexOf(')')))
-                        );
+                    ProcessClosingParenthesis();
+                    pos++;
                 }
-                //Делить после закрывающийся скобки
-                else if (Math.Abs(input.IndexOf('/') - input.IndexOf(')')) == 1)
+                else if (exp[pos] >= '0' && exp[pos] <= '9')
                 {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Divide,
-                        Parse(input.Substring(input.LastIndexOf('(') + 1, input.LastIndexOf(')') - 1)),
-                        Parse(input.Substring(input.LastIndexOf('/') + 1))
-                        );
+                    pos = ProcessInputNumber(exp, pos);
                 }
-                //Делить сам по себе
                 else
                 {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Divide,
-                        Parse(input.Substring(0, input.LastIndexOf('/'))),
-                        Parse(input.Substring(input.LastIndexOf('/') + 1))
-                        );
+                    ProcessInputOperator(exp[pos]);
+                    pos++;
                 }
             }
-            //Заметили умножить
-            else if (input.IndexOf('*') != -1)
+            return expList.Pop();
+        }
+
+        private static void ProcessClosingParenthesis()
+        {
+            while (Convert.ToChar(opExpList.Peek().Value) != '(')
+                ExecuteOperation();
+            opExpList.Pop(); // Remove the opening parenthesis
+        }
+
+        private static int ProcessInputNumber(string exp, int pos)
+        {
+
+            string value = string.Empty;
+            while (pos < exp.Length && ((exp[pos] >= '0' && exp[pos] <= '9') || exp[pos] ==','))
+                value += exp[pos++];
+            expList.Push(Expression.Constant(decimal.Parse(value)));
+
+            return pos;
+
+        }
+
+        private static void ProcessInputOperator(char op)
+        {
+            while (opExpList.Count > 0 &&
+                    OperatorCausesEvaluation(op, Convert.ToChar(opExpList.Peek().Value)))
+                ExecuteOperation();
+
+            opExpList.Push(Expression.Constant(op));
+
+        }
+
+        private static bool OperatorCausesEvaluation(char op, char prevOp)
+        {
+            bool evaluate = false;
+            switch (op)
             {
-                //Умножить перед открывающийся скобкой
-                if (Math.Abs(input.IndexOf('*') - input.IndexOf('(')) == 1)
-                {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Multiply,
-                        Parse(input.Substring(0, input.LastIndexOf('*'))),
-                        Parse(input.Substring(input.LastIndexOf('('), input.LastIndexOf(')')))
-                        );
-                }
-                //Делить после закрывающийся скобки
-                else if (Math.Abs(input.IndexOf('*') - input.IndexOf(')')) == 1)
-                {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Multiply,
-                        Parse(input.Substring(input.LastIndexOf('(') + 1, input.LastIndexOf(')') - 1)),
-                        Parse(input.Substring(input.LastIndexOf('*') + 1)));
-                }
-                //Делить сам по себе
-                else
-                {
-                    return Expression.MakeBinary
-                        (
-                        ExpressionType.Multiply,
-                        Parse(input.Substring(0, input.LastIndexOf('*'))),
-                        Parse(input.Substring(input.LastIndexOf('*') + 1))
-                        );
-                }
+                case '+':
+                case '-':
+                    evaluate = (prevOp != '(');
+                    break;
+                case '*':
+                case '/':
+                    evaluate = (prevOp == '*' || prevOp == '/');
+                    break;
+                case ')':
+                    evaluate = true;
+                    break;
             }
-            else
-                return Expression.Constant(Calc.GetNumber(input));
+            return evaluate;
+        }
+
+        //Создаётся дерево
+        private static void ExecuteOperation()
+        {
+            Expression rightOperand;
+            Expression leftOperand;
+            try
+            {
+                rightOperand = expList.Pop();
+                leftOperand = expList.Pop();
+            }
+            catch
+            {
+                throw new Exception("Строка имеет не верный формат");
+            }
+            ConstantExpression op = opExpList.Pop();
+            BinaryExpression result = op.Value switch
+            {
+                '+' => Expression.MakeBinary(ExpressionType.Add, leftOperand, rightOperand),
+                '-' => Expression.MakeBinary(ExpressionType.Subtract, leftOperand, rightOperand),
+                '*' => Expression.MakeBinary(ExpressionType.Multiply, leftOperand, rightOperand),
+                '/' => Expression.MakeBinary(ExpressionType.Divide, leftOperand, rightOperand),
+                _ => throw new ArgumentException(),
+            };
+            expList.Push(result);
         }
     }
 }
-
