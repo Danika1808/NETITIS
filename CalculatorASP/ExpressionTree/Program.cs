@@ -11,11 +11,12 @@ namespace ExpressionTree
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             ServiceCollection services = new ServiceCollection();
             services.AddScoped<IParseToTree, ParseToTree>();
-            
+            Runner runner = new Runner(services);
+            runner.Run();
         }
     }
 }
