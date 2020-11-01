@@ -9,16 +9,10 @@ namespace ExpressionTree
 {
     class Calc
     {
-        static async public Task<decimal> Calculate(Expression input)
+        public static async Task<decimal> Calculate(Expression input)
         {
             var result = await BinaryVisitor.VisitAsync(input);
             return result;
-        }
-        public static decimal GetNumber(string s)
-        {
-            const NumberStyles styles = NumberStyles.AllowDecimalPoint;
-            var provider = new CultureInfo("en-US");
-            return decimal.Parse(s, styles, provider);
         }
     }
 }

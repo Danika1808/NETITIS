@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace ExpressionTree
 {
-    public static class ParseToTree
+    public class ParseToTree : IParseToTree
     {
         public static Stack<Expression> expList = new Stack<Expression>();//Constant
         public static Stack<ConstantExpression> opExpList = new Stack<ConstantExpression>();//MakeTree
-        public static Expression ParsingExpression(string exp)
+        public Expression ParsingExpression(string exp)
         {
             opExpList.Push(Expression.Constant('('));
             int pos = 0;

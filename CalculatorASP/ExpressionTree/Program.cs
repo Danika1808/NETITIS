@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ExpressionTree
 {
@@ -11,11 +13,9 @@ namespace ExpressionTree
     {
         static async Task Main(string[] args)
         {
-            var n = "5+(7-2,2*3)*(6-4)/2";
-            var tree = ParseToTree.ParsingExpression(n);
-            BinaryVisitor binaryVisitor = new BinaryVisitor((BinaryExpression)tree);
-            binaryVisitor.VisitAndWrite();
-            Console.WriteLine(await Calc.Calculate(tree));
+            ServiceCollection services = new ServiceCollection();
+            services.AddScoped<IParseToTree, ParseToTree>();
+            
         }
     }
 }

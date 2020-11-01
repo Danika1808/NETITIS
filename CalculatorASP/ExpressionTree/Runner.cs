@@ -1,13 +1,32 @@
 ﻿using System;
+using System.IO;
 using System.Linq.Expressions;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-
+using Microsoft.Extensions.DependencyInjection;
 namespace ExpressionTree
 {
-    internal class BinaryVisitor
+    public class Runner
     {
+        private static ServiceProvider _serviceProvider;
+
+        public Runner(ServiceCollection serviceProvider)
+        {
+            _serviceProvider = serviceProvider.BuildServiceProvider();
+        }
+
+        public async void Run()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == null)
+                    break;
+                var expressionParse = _serviceProvider.GetService<IParseToTree>();
+                var tree = expressionParse.ParsingExpression(input);
+                Console.WriteLine($"Ответ {tree}");
+            }
+        }
         public static async Task<decimal> VisitAsync(Expression node)
         {
             if (node.NodeType == ExpressionType.Constant)
@@ -61,5 +80,6 @@ namespace ExpressionTree
             }
 
         }
+
     }
 }
