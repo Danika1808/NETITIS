@@ -43,6 +43,7 @@ let output (result : string option) =
     match result with
         | None -> Console.WriteLine("Bad Request")
         | Some result -> Console.WriteLine(result)
+
 [<EntryPoint>]
 let main argv = 
     let a = Console.ReadLine()
