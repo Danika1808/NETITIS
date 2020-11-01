@@ -15,13 +15,7 @@ namespace CalculatorASP
             var calclulator = new Calculator.Calculator();
             var ans = calclulator.Calc(value);
             await context.Response.WriteAsync(ans.ToString());
+            await _next.Invoke(context);
         }     
-    }
-    public static class TokenExtensions
-    {
-        public static IApplicationBuilder UseToken(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<CalculatorMiddleware>();
-        }
     }
 }

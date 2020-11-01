@@ -19,7 +19,7 @@ public class Startup
         }
         public void Configure(IApplicationBuilder app)
         {
-            app.UseToken();
+            app.UseMiddleware<CalculatorMiddleware>();
         }
     }
 }
