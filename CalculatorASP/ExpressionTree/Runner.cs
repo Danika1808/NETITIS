@@ -15,7 +15,7 @@ namespace ExpressionTree
             _serviceProvider = serviceProvider.BuildServiceProvider();
         }
 
-        public async void Run()
+        public void Run()
         {
             while (true)
             {
@@ -36,39 +36,22 @@ namespace ExpressionTree
             }
             else
             {
-                string operation;
-                switch (node.NodeType)
+                dynamic operation = node.NodeType switch
                 {
-                    case ExpressionType.Add:
-                        {
-                            operation = "%2B";
-                            break;
-                        }
-                    case ExpressionType.Subtract:
-                        {
-                            operation = "-";
-                            break;
-                        }
-                    case ExpressionType.Multiply:
-                        {
-                            operation = "*";
-                            break;
-                        }
-                    case ExpressionType.Divide:
-                        {
-                            operation = "%2F";
-                            break;
-                        }
-                    default:
-                        {
-                            throw new Exception();
-                        }
-                }
+                    ExpressionType.Add => "%2B",
+                    ExpressionType.Subtract => "-",
+                    ExpressionType.Multiply => "*",
+                    ExpressionType.Divide => "%2F",
+                    _ => throw new Exception()
+                };
                 var binaryNode = node as BinaryExpression;
-                Console.WriteLine($"The Left argument is: {binaryNode.Left}");
-                var left = Task.Run(() => VisitAsync(binaryNode.Left));
-                Console.WriteLine($"The Left argument is: {binaryNode.Right}");
-                var right = Task.Run(() => VisitAsync(binaryNode.Right));
+                Task<decimal> left = null;
+                Task<decimal> right = null;
+                var task = Task.Run(() =>
+                {
+                    left = Task.Run(() => VisitAsync(binaryNode.Left));
+                    right = Task.Run(() => VisitAsync(binaryNode.Right));
+                });
                 var tasks = await Task.WhenAll(new[] { left, right });
                 await Task.Yield();
                 var expression = tasks[0] + "+" + operation + "+" + tasks[1];
