@@ -6,8 +6,7 @@ namespace XUnitTestCalculatorServer
 {
     public class UnitTest1
     {
-        //[InlineData(new string[] { "6 - 4", "2 * 3", "7 - 6", "2 / 2", "1 * 1", "5 + 1" })]
-        [Xunit.Theory]
+        [Theory]
         [MemberData(nameof(Expression))]
         public async void MathExpressionTest1Async(decimal x, string oper, decimal y, decimal result)
         {
